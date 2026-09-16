@@ -1,0 +1,9 @@
+name: MobArena
+description: $description
+version: '${version}'
+
+main: com.core.Core
+api-version: '26.1.2'
+load: POSTWORLD
+
+authors: []
