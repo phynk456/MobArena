@@ -25,7 +25,7 @@ public class AttributeComponent<T extends Attributable & LivingEntity> implement
 
     protected final void applyAttribute(Attributable entity)
     {
-        entity.getAttribute(attribute);
+        entity.registerAttribute(attribute);
         Objects.requireNonNull(entity.getAttribute(attribute)).setBaseValue(value);
     }
 

@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
 import java.util.UUID;
 
 @NullMarked
-public class EventListener implements Listener
+public final class EventListener implements Listener
 {
 
     @EventHandler

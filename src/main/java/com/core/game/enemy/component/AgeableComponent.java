@@ -14,8 +14,15 @@ public final class AgeableComponent implements Component<Ageable>
     @Override
     public void applyComponent(Ageable entity)
     {
-        if (isBaby) entity.setBaby();
-        else entity.setAdult();
+        if (isBaby)
+        {
+            entity.setBaby();
+        }
+        else
+        {
+            entity.setAdult();
+        }
+        entity.setAgeLock(true);
     }
 
 }
