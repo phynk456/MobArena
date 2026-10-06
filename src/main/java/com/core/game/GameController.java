@@ -1,13 +1,16 @@
 package com.core.game;
 
+import com.core.game.reward.NumerousItemsReward;
 import lombok.RequiredArgsConstructor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.title.TitlePart;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jspecify.annotations.NullMarked;
 
 import java.io.IOException;
@@ -23,6 +26,7 @@ public final class GameController
     private final Player player;
     private final GameMode mode;
     private final WaveBar bar;
+    private final NumerousItemsReward reward;
 
     private int currentWave = 0, aliveEntities = 0;
 
@@ -31,7 +35,9 @@ public final class GameController
         this.arena = new GameArena(player.getUniqueId().toString());
         this.bar = new WaveBar(player);
         this.player = player;
+        // for testing mechanics
         this.mode = GameMode.EASY;
+        this.reward = new NumerousItemsReward(ItemStack.of(Material.GOLD_INGOT));
     }
 
     @NullMarked
@@ -66,6 +72,7 @@ public final class GameController
             GameTitle.show(player, "Волна " + index + " началась!");
             bar.updateState(index, aliveEntities = wave.entityCount());
             arena.spawnEntities(wave.enemies());
+            reward.add(5);
             return true;
         }
         return false;
@@ -82,6 +89,7 @@ public final class GameController
     {
         bar.clear();
         player.teleport(LOBBY.getSpawnLocation());
+        reward.giveReward(player);
         GameTitle.END.show(player);
         arena.delete(false);
     }
