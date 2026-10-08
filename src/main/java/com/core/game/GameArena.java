@@ -1,6 +1,7 @@
 package com.core.game;
 
 import com.core.Core;
+import com.core.Utility;
 import com.core.game.enemy.EnemyType;
 import lombok.Getter;
 import org.bukkit.*;
@@ -19,7 +20,7 @@ import org.jspecify.annotations.Nullable;
 public final class GameArena
 {
 
-    private final static Path GAME_DIMENSIONS_PATH = Core.getServerFromInstance().getLevelDirectory().resolve("dimensions", "game");
+    private final static Path GAME_DIMENSIONS_PATH = Utility.getLevelDir().resolve("game");
     private static final Path REFERENCE_PATH = GAME_DIMENSIONS_PATH.resolve("reference");
 
     @Getter private final Location entitySpawn;

@@ -1,9 +1,10 @@
 package com.core;
 
-import com.core.command.GameControl;
+import com.core.game.GameLobby;
 import com.core.listener.EventListener;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Server;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -16,17 +17,20 @@ import java.util.logging.Logger;
 public final class Core extends JavaPlugin
 {
 
-    private static @Getter Logger loggers;
     private static @Getter FileConfiguration configuration;
+    private static @Getter Logger loggers;
     private static @Getter Plugin instance;
 
     @Override
     public void onEnable()
     {
         updateInstance(this);
-        loggers.info("Plugin has been enabled!");
         Bukkit.getPluginManager().registerEvents(new EventListener(), this);
-        registerCommand("game", new GameControl());
+
+        GameLobby.updateSpawn(
+            Utility.getMinecraftWorld("overworld"),
+            84.5, -62, 8.5, 90, 0
+        );
     }
 
     @Override

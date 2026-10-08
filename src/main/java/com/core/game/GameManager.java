@@ -1,5 +1,7 @@
 package com.core.game;
 
+import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NullMarked;
 
@@ -9,6 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @NullMarked
+// Singleton
 public final class GameManager
 {
 
@@ -21,14 +24,15 @@ public final class GameManager
 
     public static void start(Player player) throws IOException
     {
+        if (!GameLobby.inLobby(player))
+        {
+            Bukkit.broadcast(Component.text("не в лобби"));
+            return;
+        }
+
         GameController controller = new GameController(player);
         controller.start();
-
-        UUID worldID = player.getWorld().getUID();
-        if (!CONTROLLER_MAP.containsKey(worldID))
-        {
-            CONTROLLER_MAP.put(worldID, controller);
-        }
+        CONTROLLER_MAP.put(player.getWorld().getUID(), controller);
     }
 
     public static void stop(UUID id)

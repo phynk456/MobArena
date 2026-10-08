@@ -3,17 +3,18 @@ package com.core.game;
 import com.core.game.enemy.EnemyType;
 import lombok.Getter;
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 
 import static com.core.game.enemy.EnemyType.*;
 
+@NullMarked
 public enum GameMode
 {
 
-    // just test
+    // for testing mechanics
     EASY(
         Wave.of(ZOMBIE_ADULT, ZOMBIE_BABY),
         Wave.of(ZOMBIE_ADULT, ZOMBIE_BABY)
@@ -39,7 +40,7 @@ public enum GameMode
     {
 
         @Contract("_ -> new")
-        public static @NonNull Wave of(EnemyType... enemies)
+        public static Wave of(EnemyType... enemies)
         {
             return new Wave(List.of(enemies), enemies.length);
         }

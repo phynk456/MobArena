@@ -1,32 +1,30 @@
 package com.core.game;
 
 import com.core.game.reward.NumerousItemsReward;
+import com.core.game.reward.strategy.LinearUpdateStrategy;
+import com.core.game.reward.strategy.UpdateCountStrategy;
 import lombok.RequiredArgsConstructor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.title.TitlePart;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jspecify.annotations.NullMarked;
 
 import java.io.IOException;
-import java.util.Objects;
 
 @NullMarked
 public final class GameController
 {
 
-    private static final World LOBBY = Objects.requireNonNull(Bukkit.getWorld(NamespacedKey.minecraft("overworld")));
+    private static final UpdateCountStrategy REWARD_UPDATE_STRATEGY = new LinearUpdateStrategy(2);
 
+    private final NumerousItemsReward reward;
     private final GameArena arena;
     private final Player player;
     private final GameMode mode;
     private final WaveBar bar;
-    private final NumerousItemsReward reward;
 
     private int currentWave = 0, aliveEntities = 0;
 
@@ -37,7 +35,7 @@ public final class GameController
         this.player = player;
         // for testing mechanics
         this.mode = GameMode.EASY;
-        this.reward = new NumerousItemsReward(ItemStack.of(Material.GOLD_INGOT));
+        this.reward = new NumerousItemsReward(ItemStack.of(Material.GOLD_INGOT), REWARD_UPDATE_STRATEGY);
     }
 
     @NullMarked
@@ -72,7 +70,7 @@ public final class GameController
             GameTitle.show(player, "Волна " + index + " началась!");
             bar.updateState(index, aliveEntities = wave.entityCount());
             arena.spawnEntities(wave.enemies());
-            reward.add(5);
+            reward.update();
             return true;
         }
         return false;
@@ -88,7 +86,7 @@ public final class GameController
     public void stop()
     {
         bar.clear();
-        player.teleport(LOBBY.getSpawnLocation());
+        GameLobby.teleportPlayer(player);
         reward.giveReward(player);
         GameTitle.END.show(player);
         arena.delete(false);
