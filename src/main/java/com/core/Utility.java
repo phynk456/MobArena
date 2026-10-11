@@ -9,7 +9,6 @@ import org.jspecify.annotations.NullMarked;
 
 import java.nio.file.Path;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 /**
  * class for small utilities when working with {@link Bukkit}
