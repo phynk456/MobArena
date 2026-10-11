@@ -4,12 +4,9 @@ import com.core.game.GameLobby;
 import com.core.listener.EventListener;
 import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Server;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-
 import org.jspecify.annotations.NonNull;
 
 import java.util.logging.Logger;
@@ -46,10 +43,4 @@ public final class Core extends JavaPlugin
         configuration = plugin.getConfig();
         plugin.saveDefaultConfig();
     }
-
-    public static @NonNull Server getServerFromInstance()
-    {
-        return getInstance().getServer();
-    }
-
 }

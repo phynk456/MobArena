@@ -1,15 +1,10 @@
 package com.core.game;
 
-import com.core.game.reward.NumerousItemsReward;
-import com.core.game.reward.strategy.LinearUpdateStrategy;
-import com.core.game.reward.strategy.UpdateCountStrategy;
 import lombok.RequiredArgsConstructor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.title.TitlePart;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.jspecify.annotations.NullMarked;
 
 import java.io.IOException;
@@ -18,24 +13,19 @@ import java.io.IOException;
 public final class GameController
 {
 
-    private static final UpdateCountStrategy REWARD_UPDATE_STRATEGY = new LinearUpdateStrategy(2);
-
-    private final NumerousItemsReward reward;
+    private final GameDifficulty mode;
     private final GameArena arena;
     private final Player player;
-    private final GameMode mode;
     private final WaveBar bar;
 
     private int currentWave = 0, aliveEntities = 0;
 
-    public GameController(Player player) throws IOException
+    public GameController(Player player, GameDifficulty mode) throws IOException
     {
         this.arena = new GameArena(player.getUniqueId().toString());
         this.bar = new WaveBar(player);
         this.player = player;
-        // for testing mechanics
-        this.mode = GameMode.EASY;
-        this.reward = new NumerousItemsReward(ItemStack.of(Material.GOLD_INGOT), REWARD_UPDATE_STRATEGY);
+        this.mode = mode;
     }
 
     @NullMarked
@@ -64,13 +54,13 @@ public final class GameController
      */
     private boolean startWave(int index)
     {
-        GameMode.Wave wave = mode.getWave(index);
+        GameDifficulty.Wave wave = mode.getWave(index);
         if (wave != null)
         {
             GameTitle.show(player, "Волна " + index + " началась!");
             bar.updateState(index, aliveEntities = wave.entityCount());
             arena.spawnEntities(wave.enemies());
-            reward.update();
+            mode.getReward().update();
             return true;
         }
         return false;
@@ -87,7 +77,7 @@ public final class GameController
     {
         bar.clear();
         GameLobby.teleportPlayer(player);
-        reward.giveReward(player);
+        mode.getReward().giveReward(player);
         GameTitle.END.show(player);
         arena.delete(false);
     }

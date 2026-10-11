@@ -1,7 +1,5 @@
 package com.core.game;
 
-import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NullMarked;
 
@@ -26,11 +24,10 @@ public final class GameManager
     {
         if (!GameLobby.inLobby(player))
         {
-            Bukkit.broadcast(Component.text("не в лобби"));
             return;
         }
 
-        GameController controller = new GameController(player);
+        GameController controller = new GameController(player, GameDifficulty.EASY);
         controller.start();
         CONTROLLER_MAP.put(player.getWorld().getUID(), controller);
     }
