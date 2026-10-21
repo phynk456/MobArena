@@ -1,0 +1,55 @@
+{
+    "type": "multi_action",
+    "external_title": "Меню сервера",
+    "title": "",
+    "can_close_with_escape": false,
+    "pause": false,
+    "columns": 2,
+    "after_action": "none",
+    "body":
+    {
+        "item":
+        {
+            "id": "glass",
+            "components":
+            {
+                "item_model": "titles:title"
+            }
+        },
+        "type": "item",
+        "show_decorations": false,
+        "show_tooltip": false,
+        "height": 160,
+        "width": 256
+    },
+
+    "actions":
+    [
+        {
+            "label": "Обратная связь",
+            "tooltip": "",
+            "width": 125
+        },
+        {
+            "label": "Способности",
+            "tooltip": "",
+            "width": 125
+        },
+        {
+            "label": "Справочник",
+            "tooltip": "",
+            "width": 125
+        },
+        {
+            "label": "",
+            "tooltip": "",
+            "width": 125
+        },
+        {
+            "label": "Выйти",
+            "tooltip": "",
+            "width": 125
+        }
+    ]
+
+}

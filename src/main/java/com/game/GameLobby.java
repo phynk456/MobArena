@@ -1,4 +1,4 @@
-package com.core.game;
+package com.game;
 
 import org.bukkit.Location;
 import org.bukkit.World;

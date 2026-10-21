@@ -1,4 +1,4 @@
-package com.core.game.enemy.component.attribute;
+package com.game.enemy.component.attribute;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;

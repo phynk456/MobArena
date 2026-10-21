@@ -1,4 +1,4 @@
-package com.core.game.enemy.component;
+package com.game.enemy.component;
 
 import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Ageable;

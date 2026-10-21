@@ -1,6 +1,6 @@
 package com.core;
 
-import com.core.game.GameLobby;
+import com.game.GameLobby;
 import com.core.listener.EventListener;
 import lombok.Getter;
 import org.bukkit.Bukkit;

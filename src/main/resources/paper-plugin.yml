@@ -5,4 +5,4 @@ api-version: '26.1.2'
 load: POSTWORLD
 
 main: com.core.Core
-bootstrapper: com.core.Bootstrapper
+bootstrapper: com.bootstrap.Bootstrapper

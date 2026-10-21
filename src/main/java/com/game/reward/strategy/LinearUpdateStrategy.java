@@ -1,5 +1,6 @@
-package com.core.game.reward.strategy;
+package com.game.reward.strategy;
 
+import com.game.reward.strategy.UpdateCountStrategy;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NullMarked;
 

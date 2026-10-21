@@ -1,4 +1,4 @@
-package com.core.game.reward.strategy;
+package com.game.reward.strategy;
 
 import org.jspecify.annotations.NullMarked;
 

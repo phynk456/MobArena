@@ -1,4 +1,4 @@
-package com.core.game.reward;
+package com.game.reward;
 
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NullMarked;

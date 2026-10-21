@@ -1,4 +1,4 @@
-package com.core.game;
+package com.game;
 
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;

@@ -1,4 +1,4 @@
-package com.core.game.enemy.component;
+package com.game.enemy.component;
 
 import org.bukkit.entity.LivingEntity;
 import org.jspecify.annotations.NullMarked;

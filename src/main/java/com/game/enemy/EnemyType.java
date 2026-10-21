@@ -1,8 +1,8 @@
-package com.core.game.enemy;
+package com.game.enemy;
 
-import com.core.game.enemy.component.*;
-import com.core.game.enemy.component.attribute.AttributeComponent;
-import com.core.game.enemy.component.attribute.HealthAttributeComponent;
+import com.game.enemy.component.*;
+import com.game.enemy.component.attribute.AttributeComponent;
+import com.game.enemy.component.attribute.HealthAttributeComponent;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;

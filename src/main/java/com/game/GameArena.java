@@ -1,8 +1,8 @@
-package com.core.game;
+package com.game;
 
 import com.core.Core;
 import com.core.Utility;
-import com.core.game.enemy.EnemyType;
+import com.game.enemy.EnemyType;
 import lombok.Getter;
 import org.bukkit.*;
 

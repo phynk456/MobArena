@@ -1,4 +1,4 @@
-package com.core.game;
+package com.game;
 
 import lombok.RequiredArgsConstructor;
 import net.kyori.adventure.text.Component;

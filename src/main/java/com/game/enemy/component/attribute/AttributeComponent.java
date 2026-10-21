@@ -1,6 +1,6 @@
-package com.core.game.enemy.component.attribute;
+package com.game.enemy.component.attribute;
 
-import com.core.game.enemy.component.Component;
+import com.game.enemy.component.Component;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
