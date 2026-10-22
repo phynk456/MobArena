@@ -11,14 +11,11 @@ import io.papermc.paper.registry.data.dialog.body.DialogBody;
 import io.papermc.paper.registry.keys.tags.DialogTagKeys;
 import io.papermc.paper.registry.tag.TagKey;
 import net.kyori.adventure.key.Key;
-import org.bukkit.entity.Cat;
-import org.checkerframework.checker.units.qual.C;
 import org.jspecify.annotations.NullMarked;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -38,6 +35,17 @@ public final class Bootstrapper implements PluginBootstrap
         TypedKey<Dialog> serverMenu = TypedKey.create(RegistryKey.DIALOG, Key.key("mob_arena:server_menu"));
         overwriteTagKeyForDialog(context.getLifecycleManager(), DialogTagKeys.QUICK_ACTIONS, serverMenu);
         overwriteTagKeyForDialog(context.getLifecycleManager(), DialogTagKeys.PAUSE_SCREEN_ADDITIONS, serverMenu);
+
+        CatalogPageFactory factory = new CatalogPageFactory(manager);
+         factory.createCatalog(
+             key("mob_arena:server_menu"),
+             factory.createPage(
+                 key("mob_arena:multi_catalog"),
+                 text("Справочник"),
+                 DialogBody.plainMessage(text("Каталог страниц"))
+             ),
+             factory.createPage(key("mob_arena:test"), text("Страница 1"))
+         );
 
         try
         {
