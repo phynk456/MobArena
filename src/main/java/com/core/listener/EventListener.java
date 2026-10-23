@@ -12,6 +12,7 @@ import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.jspecify.annotations.NullMarked;
 
@@ -27,15 +28,17 @@ public final class EventListener implements Listener
     {
         Entity entity = event.getEntity();
         UUID id = entity.getWorld().getUID();
-        if (entity instanceof Player)
-        {
-            GameManager.stop(id);
-        }
-        else
+        if (!(entity instanceof Player))
         {
             GameManager.monsterDeath(id);
         }
 
+    }
+
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event)
+    {
+        GameManager.stop(event.getPlayer().getWorld().getUID());
     }
 
     @EventHandler
