@@ -11,16 +11,21 @@ import io.papermc.paper.registry.data.dialog.body.DialogBody;
 import io.papermc.paper.registry.keys.tags.DialogTagKeys;
 import io.papermc.paper.registry.tag.TagKey;
 import net.kyori.adventure.key.Key;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.object.ObjectContents;
+import org.bukkit.inventory.ItemStack;
 import org.jspecify.annotations.NullMarked;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
 import static net.kyori.adventure.text.Component.text;
 import static net.kyori.adventure.key.Key.key;
+import static com.bootstrap.CatalogPageFactory.PageData;
 
 @NullMarked
 @SuppressWarnings("UnstableApiUsage")
@@ -39,12 +44,12 @@ public final class Bootstrapper implements PluginBootstrap
         CatalogPageFactory factory = new CatalogPageFactory(manager);
          factory.createCatalog(
              key("mob_arena:server_menu"),
-             factory.createPage(
+             new PageData(
                  key("mob_arena:multi_catalog"),
                  text("Справочник"),
                  DialogBody.plainMessage(text("Каталог страниц"))
              ),
-             factory.createPage(key("mob_arena:test"), text("Страница 1"))
+             new PageData(key("mob_arena:test"), text("Страница 1"))
          );
 
         try

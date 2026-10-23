@@ -31,7 +31,7 @@ final class CatalogPageFactory {
 
     private final LifecycleEventManager<BootstrapContext> manager;
 
-    private void registerDialog(Page data, DialogType type) {
+    private void registerDialog(PageData data, DialogType type) {
         manager.registerEventHandler(RegistryEvents.DIALOG.compose(), event -> event.registry().register(
             TypedKey.create(RegistryKey.DIALOG, data.key), builder -> builder
             .base(DialogBase.builder(empty()).canCloseWithEscape(false).pause(false).body(data.bodies).afterAction(DialogBase.DialogAfterAction.NONE).build())
@@ -39,10 +39,10 @@ final class CatalogPageFactory {
         ));
     }
 
-    void createCatalog(Key root, Page currentPage, Page... subPages)
+    void createCatalog(Key root, PageData currentPage, PageData... subPages)
     {
         List<ActionButton> actions = new ArrayList<>();
-        for (Page data : subPages)
+        for (PageData data : subPages)
         {
             registerDialog(data, DialogType.notice(createReturnButton(currentPage.key)));
             actions.add(data.btnToCurrentDialog);
@@ -50,12 +50,14 @@ final class CatalogPageFactory {
         registerDialog(currentPage, DialogType.multiAction(actions, createReturnButton(root), 2));
     }
 
-    Page createPage(Key key, TextComponent pageName, DialogBody... bodies)
+    record PageData(Key key, ActionButton btnToCurrentDialog, List<DialogBody> bodies)
     {
-        return new Page(key, createReturnButton(pageName, key), List.of(bodies));
-    }
+        PageData (Key key, TextComponent pageName, DialogBody... bodies)
+        {
 
-    record Page(Key key, ActionButton btnToCurrentDialog, List<DialogBody> bodies) {}
+            this(key, createReturnButton(pageName, key), List.of(bodies));
+        }
+    }
 
     private static ActionButton createReturnButton(Key key)
     {
