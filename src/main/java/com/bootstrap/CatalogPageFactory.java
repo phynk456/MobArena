@@ -41,6 +41,11 @@ final class CatalogPageFactory {
 
     void createCatalog(Key root, PageData currentPage, PageData... subPages)
     {
+        if (subPages.length == 0)
+        {
+            throw new IllegalArgumentException("At least one page is required");
+        }
+
         List<ActionButton> actions = new ArrayList<>();
         for (PageData data : subPages)
         {

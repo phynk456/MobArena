@@ -10,7 +10,7 @@ import org.jspecify.annotations.NullMarked;
 import java.io.IOException;
 
 @NullMarked
-public final class GameController
+final class GameController
 {
 
     private final GameDifficulty mode;
@@ -20,7 +20,7 @@ public final class GameController
 
     private int currentWave = 0, aliveEntities = 0;
 
-    public GameController(Player player, GameDifficulty mode) throws IOException
+    GameController(Player player, GameDifficulty mode) throws IOException
     {
         this.arena = new GameArena(player.getUniqueId().toString());
         this.bar = new WaveBar(player);
@@ -38,12 +38,12 @@ public final class GameController
 
         private final TextComponent text;
 
-        public void show(Player player)
+        void show(Player player)
         {
             player.sendTitlePart(TitlePart.TITLE, text);
         }
 
-        public static void show(Player player, String text)
+        static void show(Player player, String text)
         {
             player.sendTitlePart(TitlePart.TITLE, Component.text(text));
         }
@@ -66,14 +66,14 @@ public final class GameController
         return false;
     }
 
-    public void start()
+    void start()
     {
         player.teleport(arena.getPlayerSpawn());
         GameTitle.START.show(player);
         startWave(0);
     }
 
-    public void stop()
+    void stop()
     {
         bar.clear();
         GameLobby.teleportPlayer(player);
@@ -85,7 +85,7 @@ public final class GameController
     /**
      * @return boolean - was new wave launched
      */
-    public boolean monsterDeath()
+    boolean monsterDeath()
     {
         bar.updateProgress(aliveEntities -= 1);
         return aliveEntities == 0 && !startWave(currentWave += 1);
